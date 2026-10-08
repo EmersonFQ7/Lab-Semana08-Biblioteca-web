@@ -1,7 +1,6 @@
 # Biblioteca.Web
 
 Lab Semana 08 - Desarrollo Empresarial Avanzado
-Universidad - VII Ciclo
 
 ## Descripción
 
@@ -15,7 +14,6 @@ y procedimientos almacenados en SQL Server.
 - Dapper 2.1.89
 - Microsoft.Data.SqlClient 7.1.1
 - SQL Server (SSMS 22)
-- Bootstrap 5
 
 ## Requisitos
 
@@ -25,7 +23,16 @@ y procedimientos almacenados en SQL Server.
 
 ## Configuración
 
-1. Restaurar la base de datos `BibliotecaDB` con los datos de prueba.
-2. Ejecutar el script de los stored procedures.
-3. Ajustar la cadena de conexión en `appsettings.json` → `Server=TU_INSTANCIA`.
-4. Ejecutar:
+1. Clonar este repositorio.
+2. Abrir SSMS 22 y ejecutar en orden:
+   - `Scripts/01_BibliotecaDB.sql` (crea la BD y datos de prueba)
+   - `Scripts/02_StoredProcedures.sql` (crea los 10 SPs)
+3. Ajustar la cadena de conexión en `appsettings.json` con tu `Server=` real.
+4. Restaurar paquetes y correr:
+dotnet restore
+dotnet run
+5. Abrir `http://localhost:5245`
+
+## Autor
+
+Emerson -
