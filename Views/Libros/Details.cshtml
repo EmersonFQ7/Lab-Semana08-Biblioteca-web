@@ -1,0 +1,41 @@
+@model Biblioteca.Web.Models.Libro
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="card">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Id</dt>
+            <dd class="col-sm-9">@Model.LibroId</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Titulo)</dt>
+            <dd class="col-sm-9">@Model.Titulo</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(m => m.ISBN)</dt>
+            <dd class="col-sm-9">@Model.ISBN</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(m => m.AutorNombre)</dt>
+            <dd class="col-sm-9">@Model.AutorNombre</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Ejemplares)</dt>
+            <dd class="col-sm-9">@Model.Ejemplares</dd>
+
+            <dt class="col-sm-3">Estado</dt>
+            <dd class="col-sm-9">
+                @if (Model.Activo)
+                {
+                    <span class="badge bg-success">Activo</span>
+                }
+                else
+                {
+                    <span class="badge bg-danger">Inactivo</span>
+                }
+            </dd>
+        </dl>
+    </div>
+</div>
+
+<div class="mt-3">
+    <a asp-action="Edit" asp-route-id="@Model.LibroId" class="btn btn-warning">Editar</a>
+    <a asp-action="Index" class="btn btn-secondary">Volver al listado</a>
+</div>

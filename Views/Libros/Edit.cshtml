@@ -1,0 +1,50 @@
+@model Biblioteca.Web.Models.Libro
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit" method="post">
+            @Html.AntiForgeryToken()
+
+            @* Campo oculto con el Id del libro que se esta editando *@
+            <input type="hidden" asp-for="LibroId" />
+
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="mb-3">
+                <label asp-for="Titulo" class="form-label"></label>
+                <input asp-for="Titulo" class="form-control" />
+                <span asp-validation-for="Titulo" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="ISBN" class="form-label"></label>
+                <input asp-for="ISBN" class="form-control" />
+                <span asp-validation-for="ISBN" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="AutorId" class="form-label"></label>
+                <select asp-for="AutorId" class="form-select"
+                        asp-items="@((SelectList)ViewData["Autores"]!)">
+                    <option value="">-- Seleccione un autor --</option>
+                </select>
+                <span asp-validation-for="AutorId" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Ejemplares" class="form-label"></label>
+                <input asp-for="Ejemplares" class="form-control" />
+                <span asp-validation-for="Ejemplares" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-warning">Guardar cambios</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

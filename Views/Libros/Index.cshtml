@@ -1,0 +1,62 @@
+@model IEnumerable<Biblioteca.Web.Models.Libro>
+
+@{
+    var busqueda = ViewData["Busqueda"] as string;
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row mb-3">
+    <div class="col-md-6">
+        <form asp-action="Index" method="get" class="d-flex">
+            <input type="text" name="busqueda" value="@busqueda"
+                   class="form-control me-2" placeholder="Buscar por titulo..." />
+            <button type="submit" class="btn btn-primary">Buscar</button>
+            @if (!string.IsNullOrWhiteSpace(busqueda))
+            {
+                <a asp-action="Index" class="btn btn-secondary ms-2">Limpiar</a>
+            }
+        </form>
+    </div>
+    <div class="col-md-6 text-end">
+        <a asp-action="Create" class="btn btn-success">+ Nuevo Libro</a>
+    </div>
+</div>
+
+@if (!string.IsNullOrWhiteSpace(busqueda))
+{
+    <p class="text-muted">
+        Resultados para: <strong>@busqueda</strong> (@Model.Count() encontrados)
+    </p>
+}
+
+<table class="table table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Id</th>
+            <th>Titulo</th>
+            <th>ISBN</th>
+            <th>Autor</th>
+            <th class="text-center">Ejemplares</th>
+            <th class="text-center">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!Model.Any())
+        {
+            <tr>
+                <td colspan="6" class="text-center text-muted">
+                    No se encontraron libros.
+                </td>
+            </tr>
+        }
+        else
+        {
+            @foreach (var libro in Model)
+            {
+                @* Reutilizamos la partial view _LibroRow *@
+                <partial name="_LibroRow" model="libro" />
+            }
+        }
+    </tbody>
+</table>
